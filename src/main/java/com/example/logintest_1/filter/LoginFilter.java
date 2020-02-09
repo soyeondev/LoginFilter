@@ -37,7 +37,6 @@ public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
-       
 		CharResponseWrapper wrapper = new CharResponseWrapper((HttpServletResponse) response);
         ResponseWrapper rw = new ResponseWrapper(response);
         DecryptRequestWrapper rWrapper = new DecryptRequestWrapper((HttpServletRequest) request);
@@ -78,6 +77,7 @@ public class LoginFilter implements Filter {
 	        rWrapper.setDecryptParameter(request.getParameterMap(), d_id, d_pwd);
 	        
 	        chain.doFilter(rWrapper, wrapper);
+	        
 	        
         }
         
