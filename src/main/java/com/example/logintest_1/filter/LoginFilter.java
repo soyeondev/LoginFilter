@@ -54,8 +54,7 @@ public class LoginFilter implements Filter {
 
         }
         
-//        if(rWrapper.getMethod().equals("POST") && rWrapper.getServletPath().equals("/login")){
-        if(rWrapper.getMethod().equals("POST")){
+        if(rWrapper.getMethod().equals("POST") && rWrapper.getServletPath().equals("/login")){
         	System.out.println("POST 들어옴");
         	
 	        String e_id = request.getParameter("username");
@@ -69,15 +68,14 @@ public class LoginFilter implements Filter {
 	
 			// 디코딩한 문자열을 표시
 			String d_id = new String(decodedBytesId);
-			System.out.println("d_id: "+d_id);
+//			System.out.println("d_id: "+d_id);
 	
 			String d_pwd = new String(decodedBytesPwd);
-			System.out.println("d_pwd: "+d_pwd);
+//			System.out.println("d_pwd: "+d_pwd);
 	        
 	        rWrapper.setDecryptParameter(request.getParameterMap(), d_id, d_pwd);
 	        
 	        chain.doFilter(rWrapper, wrapper);
-	        
 	        
         }
         

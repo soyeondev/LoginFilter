@@ -2,6 +2,7 @@ package com.example.logintest_1;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,13 +23,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()				
 				.antMatchers("/", "/home").permitAll()
+//				.antMatchers(HttpMethod.POST, "/login?logout").authenticated()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
+//				.loginPage("/login?logout")
 				.loginPage("/login")
 				.permitAll()
+				.defaultSuccessUrl("/hello", true)
 				.and()
 			.logout()
+//				.logoutSuccessUrl("/login")
 				.permitAll();
 		http.addFilterBefore(new LoginFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
